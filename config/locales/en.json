@@ -1,0 +1,10 @@
+{
+	"Welcome": "Welcome",
+	"A brand new app.": "A brand new app.",
+	"login_form_heading": "Please sign in",
+    "login_username": "Username",
+    "login_password": "Password",
+    "login_btn_sign_in": "Sign in",
+    "login_register_hint":"No Account? Register ",
+    "login_register_hint_here":"here!"
+}
