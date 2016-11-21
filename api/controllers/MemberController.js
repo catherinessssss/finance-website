@@ -11,7 +11,7 @@ module.exports = {
         if (req.method == "GET")
             return res.view('member/login');
         else {
-            Member.findOne({username:req.body.username})
+            Member.findOne({username:req.body.username}).populateAll()
             .exec(function (err, user) {
                 var responseData = {
                     success : true,
@@ -31,6 +31,11 @@ module.exports = {
                     return res.send(responseData);
                 }
 
+                if (req.body.code != user.smsCode[0].code) {
+                    responseData.success = false;
+                    responseData.message = 'Wrong SMS Code';
+                    return res.send(responseData);
+                }
                 responseData.data = user;
                 req.session.username = req.body.username;
                 req.session.userid = user.id;

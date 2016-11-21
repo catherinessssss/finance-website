@@ -19,6 +19,15 @@ module.exports = {
         required: true,
         columnName: 'password'
     },
+    phone: {
+      type: 'string',
+      required : true,
+      columnName: 'phone'
+    },
+    smsCode: {
+        collection: 'SmsCode',
+        via: 'customer'
+    },
     toJSON: function() {
       var obj = this.toObject();
       delete obj.password;
