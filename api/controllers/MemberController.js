@@ -39,6 +39,7 @@ module.exports = {
                 responseData.data = user;
                 req.session.username = req.body.username;
                 req.session.userid = user.id;
+                req.session.nav = 0;
                 return res.send(responseData);
             });
             
@@ -74,6 +75,23 @@ module.exports = {
                 }
             });
         });
+    },
+    logout:function(req,res) {
+        req.session.username = '';
+        req.session.userid = '';
+        return res.redirect('/');
+    },
+    index: function(req, res) {
+        return res.view('home');
+    },
+    json: function(req, res) {
+        Member.find().populateAll().exec(function(err, data) {
+            if(err) {
+                return res.send(err);
+            }
+            return res.json(data);
+        })
+        
     }
 };
 

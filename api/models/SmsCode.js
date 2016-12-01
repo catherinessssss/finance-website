@@ -8,6 +8,7 @@
 module.exports = {
 
   attributes: {
+    tableName: 'cm_smscode',
     customer: {
         collection: 'Member',
         via: 'smsCode'
@@ -24,7 +25,7 @@ module.exports = {
         type: 'datetime',
         columnName: 'expireTime',
         defaultsTo: function() {
-            return new Date(new Date(this.createTime).getTime() + 60 * 1000);
+            return new Date(new Date(this.createTime).getTime() + 5 * 60 * 1000);
         }
     },
     vertifyCode: function(values) {

@@ -1,0 +1,78 @@
+<h1><%= __('overseas_remittance') %></h1>
+<div style="margin-top:60px;">
+    <form class="form-horizontal" role="form" action="/account/exchange" method="GET">
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_name') %></label>
+            <div class="col-sm-5">
+                <label class="control-label"><%= user.username%></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_identity') %></label>
+            <div class="col-sm-5">
+                <label class="control-label"><%= user.identityNo%></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_contact_number') %></label>
+            <div class="col-sm-5">
+                <input type="number" class="form-control" required id="foreign_exchange_contact_number">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_account') %></label>
+            <div class="col-sm-5">
+               <select class="form-control" id="foreign_exchange_account">
+                <option value="HONG KONG">HONG KONG</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_type') %></label>
+            <div class="col-sm-5">
+                <label class="form-control" required id="foreign_exchange_type"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_amount') %></label>
+            <div class="col-sm-5">
+                <label class="form-control" required id="foreign_exchange_amount"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <h3 class="col-sm-7 control-label">Buy Information</h3>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_buy_type') %></label>
+            <div class="col-sm-5">
+                <select class="form-control" id="foreign_exchange_account">
+                <option value="HONG KONG">HONG KONG</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_buy_amount') %></label>
+            <div class="col-sm-5">
+                <label class="form-control" required id="foreign_exchange_buy_amount"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_usd') %></label>
+            <div class="col-sm-5">
+                <label class="form-control" required id="foreign_exchange_usd"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_HKD') %></label>
+            <div class="col-sm-5">
+                <label class="form-control" required id="foreign_exchange_HKD"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_use') %></label>
+            <div class="col-sm-5">
+                <input type="number" class="form-control" required id="foreign_exchange_use">
+            </div>
+        </div>
+    </form>
+</div>

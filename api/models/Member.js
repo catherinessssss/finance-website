@@ -8,6 +8,7 @@
 module.exports = {
 
   attributes: {
+    tableName: 'cm_users',
   	username: {
         type: 'string',
         unique: true,
@@ -24,6 +25,15 @@ module.exports = {
       required : true,
       columnName: 'phone'
     },
+    identityNo: {
+      type: 'string',
+      required: true,
+      columnName: 'identityNo'
+    },
+    account: {
+      collection: 'Account',
+      via: 'customer'
+    },
     smsCode: {
         collection: 'SmsCode',
         via: 'customer'
@@ -33,6 +43,22 @@ module.exports = {
       delete obj.password;
       return obj;
     }
+  },
+  afterCreate: function(values, next) {
+    var accountData = {
+      accountType: 'HKD',
+      // amount: 0
+      // for test
+      amount: 10000,
+      accountNum: '350001002222222'
+    };
+    Account.create(accountData).exec(function(err,account) {
+      if(!err) {
+        account.customer.add(values.id);
+        account.save();
+      }
+      next();
+    });
   }
 };
 

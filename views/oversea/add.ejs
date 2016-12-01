@@ -1,0 +1,150 @@
+<h1><%= __('overseas_remittance') %></h1>
+<div style="margin-top:60px;">
+<form class="form-horizontal" role="form" action="/swiftRecord/create" method="GET">
+    <div class="form-group">
+        <h3 class="col-sm-7 control-label"><%= __('swiftRecord_create_remitter_information') %></h3>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_name') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%= user.username %></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_identityNo') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%= user.identityNo %></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_country" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_country') %></label>
+        <div class="col-sm-5">
+            <select class="form-control" id="swiftRecord_create_remitter_country" name="SwiftRecord[country]">
+                <option value="HONG KONG">HONG KONG</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_address" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_address') %></label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" required id="swiftRecord_create_remitter_address" name="SwiftRecord[address]">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_account" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_account') %></label>
+        <div class="col-sm-5">
+            <select id="swiftRecord_create_remitter_account" class="form-control" onchange="accountChange(<%=user.account%>);">
+                <% for(var length=user.account.length; length > 0; length--) {%>
+                <option value="<%= user.account[length-1].id%>">**********<%=user.account[length-1].accountNum.substring(11)%></option>
+                <% }%>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_currency" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_currency') %></label>
+        <div class="col-sm-5">
+            <label class="control-label" id="swiftRecord_create_remitter_currency"><%=user.account[user.account.length-1].accountType%></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_amount_avaliable" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_amount_avaliable') %></label>
+        <div class="col-sm-5">
+            <label class="control-label" id="swiftRecord_create_remitter_amount_avaliable"><%=user.account[user.account.length-1].amount%></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_remittance_amount" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_remittance_amount') %></label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control" required id="swiftRecord_create_remitter_remittance_amount" name="SwiftRecord[remittanceAmount]" oninput="getRealAmount(this)">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_realtime_amount" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_realtime_amount') %></label>
+        <div class="col-sm-5">
+            <labelclass="form-control" id="swiftRecord_create_remitter_realtime_amount"></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_processing_fee_account" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_processing_fee_account') %></label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" required id="swiftRecord_create_remitter_processing_fee_account">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_processing_fee" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_processing_fee') %></label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" required id="swiftRecord_create_remitter_processing_fee">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_processing_fee_currency" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_processing_fee_currency') %></label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" required id="swiftRecord_create_remitter_processing_fee_currency">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_processing_fee_amount" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_processing_fee_amount') %></label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" required id="swiftRecord_create_remitter_processing_fee_amount">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_expense_way" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_expense_way') %></label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" required id="swiftRecord_create_remitter_expense_way">
+        </div>
+    </div>
+</form>
+</div>
+<script type="text/javascript">
+    function accountChange(account) {
+        var remitterAccount = document.getElementById("swiftRecord_create_remitter_account").value;
+            remitterCurrency = document.getElementById("swiftRecord_create_remitter_currency"),
+            remitterAmount = document.getElementById("swiftRecord_create_remitter_amount_avaliable");
+
+        for(var i = account.length; length > 0; length--) {
+            if(account[length-1].id === remitterAccount) {
+                remitterCurrency.innerHTML = account[length-1].accountType;
+                remitterAmount.innerHTML = account[length-1].amount;
+                break;
+            }
+        }
+    }
+
+    function getRealAmount(e) {
+        var remitterCurrency = document.getElementById("swiftRecord_create_remitter_currency").innerHTML,
+            remitterAmount = e.value;
+            
+        getRealtimeAmount(remitterAmount,remitterCurrency)
+    }
+
+    function getRealtimeAmount(remitterAmount,remitterCurrency) {
+        var appKey = 'fc8b5e2942d168d96a5619dd94b0b599',
+        data = 'fromCurrency='+remitterCurrency+'&toCurrency=USD&amount='+remitterAmount,
+        url = 'http://apis.baidu.com/apistore/currencyservice/currency?'+data;
+        console.log(url);
+        $.ajax({
+            //请求类型，这里为POST
+            type: 'GET',
+            //你要请求的api的URL
+            url: url ,
+            //是否使用缓存
+            cache:false,
+            //添加额外的请求头
+            headers : {'apikey':appKey},
+            //请求成功的回调函数
+            success: function(data){
+            //函数参数 "data" 为请求成功服务端返回的数据
+            var result = JSON.parse(data);
+                if(result.errMsg == 'success'){
+                    var realTimeAmount = document.getElementById("swiftRecord_create_remitter_realtime_amount");
+                    console.log(result);
+                    realTimeAmount.innerHTML = result.convertedamount;
+                } else {
+                    alert(result.errMsg);
+                }
+            }
+        });
+
+    }
+</script>

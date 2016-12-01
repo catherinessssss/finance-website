@@ -13,7 +13,7 @@ module.exports.bootstrap = function(cb) {
 
   // It's very important to trigger this callback method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
-    var person = {"id":1, "username": "li", "password": 'c4ca4238a0b923820dcc509a6f75849b', "phone":"66596763"  };
+    var person = {"id":1, "username": "li", "password": 'c4ca4238a0b923820dcc509a6f75849b', "phone":"66596763", 'identityNo':'350581199205142026'  };
 
     Member.create(person).exec( function(err, model) {});
     cb();

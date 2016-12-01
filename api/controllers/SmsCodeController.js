@@ -27,7 +27,7 @@ module.exports = {
                      if(err) {
                         return res.send(err);
                      }
-                     return res.send('Code sent!');
+                     return res.send('Code sent! Your SMSCode is '+ data.code);
                 });
             } else {
                 return res.send('No Such User');

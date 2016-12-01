@@ -48,4 +48,11 @@ module.exports.policies = {
 		// before letting any users feed our rabbits
 		// feed : ['isNiceToAnimals', 'hasRabbitFood']
 	// }
+
+  SwiftRecordController: {
+    create: 'isUser'
+  },
+  ForeignExchangeController: {
+    buy: 'isUser'
+  }
 };
