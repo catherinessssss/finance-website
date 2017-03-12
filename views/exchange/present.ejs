@@ -1,0 +1,79 @@
+<h1><%= __('foreign_exchange') %></h1>
+<div style="margin-top:60px;">
+    <form class="form-horizontal" role="form" action="/foreignExchange/confirm/<%=data.id%>" method="GET">
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_name') %></label>
+            <div class="col-sm-5">
+                <label class="control-label"><%= user.username%></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_identity') %></label>
+            <div class="col-sm-5">
+                <label class="control-label"><%= user.identityNo%></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_contact_number') %></label>
+            <div class="col-sm-5">
+                <label class="control-label" id="foreign_exchange_contact_number"><%=data.contactNum%></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_account') %></label>
+            <div class="col-sm-5">
+               <label class="control-label" ><%=data.account[0].accountNum%></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_type') %></label>
+            <div class="col-sm-5">
+                <label class="control-label" id="foreign_exchange_type">HKD</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_amount') %></label>
+            <div class="col-sm-5">
+                <label class="control-label" id="foreign_exchange_amount"><%=data.account[0].amount%></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <h3 class="col-sm-7 control-label">Buy Information</h3>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_buy_type') %></label>
+            <div class="col-sm-5">
+                <label class="control-label"><%=data.buyCurrencyType%></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_buy_amount') %></label>
+            <div class="col-sm-5">
+               <label class="control-label"><%=data.buyAmount%></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_usd') %></label>
+            <div class="col-sm-5">
+                <label class="control-label" id="foreign_exchange_usd" ><%=data.toUSD%></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_HKD') %></label>
+            <div class="col-sm-5">
+                <label class="control-label" id="foreign_exchange_HKD"><%=data.toHKD%></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><%= __('foreign_exchange_use') %></label>
+            <div class="col-sm-5">
+               <label class="control-label"><%=data.useFor%></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-6 col-sm-10">
+              <button type="submit" class="btn btn-primary "><%= __('common_btn_confirm')%></button>
+            </div>
+        </div>
+    </form>
+</div>

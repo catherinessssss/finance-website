@@ -1,6 +1,6 @@
-<h1><%= __('overseas_remittance') %></h1>
+<h1><%= __('foreign_exchange') %></h1>
 <div style="margin-top:60px;">
-    <form class="form-horizontal" role="form" action="/account/exchange" method="GET">
+    <form class="form-horizontal" role="form" action="/foreignExchange/create" method="POST">
         <div class="form-group">
             <label class="col-sm-4 control-label"><%= __('foreign_exchange_name') %></label>
             <div class="col-sm-5">
@@ -16,27 +16,30 @@
         <div class="form-group">
             <label class="col-sm-4 control-label"><%= __('foreign_exchange_contact_number') %></label>
             <div class="col-sm-5">
-                <input type="number" class="form-control" required id="foreign_exchange_contact_number">
+                <input type="number" class="form-control" required id="foreign_exchange_contact_number" name="ForeignExchange[contactNum]">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-4 control-label"><%= __('foreign_exchange_account') %></label>
             <div class="col-sm-5">
-               <select class="form-control" id="foreign_exchange_account">
-                <option value="HONG KONG">HONG KONG</option>
+               <select class="form-control" id="foreign_exchange_account"  onchange="accountChange(<%=HKDAccount%>);" name="ForeignExchange[account]">
+                <% for(var length = HKDAccount.length; length > 0; length--) { %>
+                <%   if(HKDAccount[length-1].accountType == 'HKD') { %>
+                        <option value="<%=HKDAccount[length-1].id%>">**********<%=HKDAccount[length-1].accountNum.substring(11)%></option>
+                <%}}%>
                 </select>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-4 control-label"><%= __('foreign_exchange_type') %></label>
             <div class="col-sm-5">
-                <label class="form-control" required id="foreign_exchange_type"></label>
+                <label class="control-label" id="foreign_exchange_type">HKD</label>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-4 control-label"><%= __('foreign_exchange_amount') %></label>
             <div class="col-sm-5">
-                <label class="form-control" required id="foreign_exchange_amount"></label>
+                <label class="control-label" id="foreign_exchange_amount"><%=HKDAccount[HKDAccount.length-1].amount%></label>
             </div>
         </div>
         <div class="form-group">
@@ -45,34 +48,84 @@
         <div class="form-group">
             <label class="col-sm-4 control-label"><%= __('foreign_exchange_buy_type') %></label>
             <div class="col-sm-5">
-                <select class="form-control" id="foreign_exchange_account">
-                <option value="HONG KONG">HONG KONG</option>
+                <select class="form-control" id="foreign_exchange_buy_type" name="ForeignExchange[buyCurrencyType]" onchange="getRealAmount()">
+                <option value="GBP">GBP</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
                 </select>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-4 control-label"><%= __('foreign_exchange_buy_amount') %></label>
             <div class="col-sm-5">
-                <label class="form-control" required id="foreign_exchange_buy_amount"></label>
+                <input type="number" class="form-control" required id="foreign_exchange_buy_amount" name="ForeignExchange[buyAmount]" oninput="getRealAmount()"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-4 control-label"><%= __('foreign_exchange_usd') %></label>
             <div class="col-sm-5">
-                <label class="form-control" required id="foreign_exchange_usd"></label>
+                <label class="control-label" id="foreign_exchange_usd" ></label>
+                <input type="hidden" name="ForeignExchange[toUSD]" id="foreign_exchange_usd1">
+                <input type="hidden" name="ForeignExchange[toHKD]" id="foreign_exchange_HKD1">
+                <input type="hidden" id="foreign_exchange_rate" name="ForeignExchange[rate]"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-4 control-label"><%= __('foreign_exchange_HKD') %></label>
             <div class="col-sm-5">
-                <label class="form-control" required id="foreign_exchange_HKD"></label>
+                <label class="control-label" id="foreign_exchange_HKD"></label>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-4 control-label"><%= __('foreign_exchange_use') %></label>
             <div class="col-sm-5">
-                <input type="number" class="form-control" required id="foreign_exchange_use">
+                <input type="text" class="form-control" id="foreign_exchange_use"  name="ForeignExchange[useFor]">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-6 col-sm-10">
+              <button type="submit" class="btn btn-primary "><%= __('common_btn_submit')%></button>
             </div>
         </div>
     </form>
 </div>
+
+<script type="text/javascript">
+    function accountChange(account) {
+        var remitterAccount = document.getElementById("foreign_exchange_account").value;
+            remitterAmount = document.getElementById("foreign_exchange_amount");
+
+        for(var i = account.length; length > 0; length--) {
+            if(account[length-1].id === remitterAccount) {
+                remitterAmount.innerHTML = account[length-1].amount;
+                break;
+            }
+        }
+    }
+
+    function getRealAmount() {
+        var HKD = document.getElementById("foreign_exchange_HKD"),
+            USD = document.getElementById("foreign_exchange_usd"),
+            hkdInput = document.getElementById("foreign_exchange_HKD1"),
+            usdInput = document.getElementById("foreign_exchange_usd1"),
+            rate = document.getElementById("foreign_exchange_rate"),
+            buyCurrencyType = document.getElementById("foreign_exchange_buy_type").value,
+            e = document.getElementById("foreign_exchange_buy_amount");
+
+        $.ajax({
+            type: 'GET',
+            url: 'http://api.fixer.io/latest?base='+ buyCurrencyType,
+            success:function(data) {
+                var rates = data.rates;
+                rate.value = rates.HKD;
+                var HKDAmount = (rates.HKD * Number(e.value)).toFixed(2),
+                    USDAmount = (rates.USD * Number(e.value)).toFixed(2);
+
+                HKD.innerHTML = HKDAmount
+                USD.innerHTML = USDAmount
+                hkdInput.value = HKDAmount;
+                usdInput.value = USDAmount;
+            }
+        });
+    }
+</script>

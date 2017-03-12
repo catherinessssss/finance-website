@@ -67,7 +67,7 @@
             success: function(responseData) {
                 alert(responseData);
 
-                if(responseData === 'Code sent!') {
+                if(responseData.search('Code sent!') === 0) {
                     btn.disabled = true;
                     timer = setInterval(setTimer, 1000);
                 }

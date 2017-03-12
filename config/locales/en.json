@@ -1,5 +1,7 @@
 {
-	"Welcome": "Welcome",
+	"common_btn_submit": "Submit",
+    "common_btn_confirm":"Confirm",
+    "Welcome": "Welcome",
 	"A brand new app.": "A brand new app.",
 	"login_form_heading": "Please sign in",
     "login_username": "Username",
@@ -26,6 +28,7 @@
     "swiftRecord_create_remitter_expense_way": "Expense Way",
     "overseas_remittance":"Overseas Remittance",
 
+    "swiftRecord_create_beneficiary_information" : "Beneficiary Information",
     "swiftRecord_create_beneficiary_name": "Beneficiary Name",
     "swiftRecord_create_beneficiary_address": "Beneficiary Address",
     "swiftRecord_create_beneficiary_account": "Beneficiary Account",
@@ -37,6 +40,7 @@
     "swiftRecord_create_contact_name":"Contact Name",
     "swiftRecord_create_contact_num":"Contact Number",
 
+    "foreign_exchange": "Foreign Exchange",
     "foreign_exchange_name":"Name",
     "foreign_exchange_identity": "Identity No",
     "foreign_exchange_contact_number": "Contact Number",

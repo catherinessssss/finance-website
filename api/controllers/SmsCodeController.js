@@ -32,9 +32,7 @@ module.exports = {
             } else {
                 return res.send('No Such User');
             }
-        });
-
-        
+        });  
     }
 };
 

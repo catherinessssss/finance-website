@@ -19,7 +19,7 @@ module.exports = {
         columnName: 'address'
     },
     remittanceAmount: {
-        type: 'integer',
+        type: 'float',
         columnName: 'remittanceAmount'
     },
     account: {
@@ -27,15 +27,15 @@ module.exports = {
         via:'swiftRecord'
     },
     realTimeAmount: {
-        type: 'integer',
+        type: 'float',
         columnName: 'realTimeAmount'
     },
     feeAccount: {
-        type: 'integer',
+        type: 'string',
         columnName: "feeAccount"
     },
     feeAmount: {
-        type: 'integer',
+        type: 'float',
         columnName: "feeAmount"
     },
     feeType: {
@@ -44,7 +44,7 @@ module.exports = {
     },
     expenseWay: {
         type: 'string',
-        enum: ['Remitter', 'Both'],
+        enum: ['Second Party', 'Both'],
         columnName: 'expenseWay'
     },
     beneficiaryName: {
@@ -71,6 +71,10 @@ module.exports = {
         type: 'string',
         columnName: 'beneficiaryResidentCountry'
     },
+    purposes: {
+        type: 'string',
+        columnName: 'purposes'
+    },
     contactName: {
         type: 'string',
         columnName: 'contactName'
@@ -78,6 +82,13 @@ module.exports = {
     contactNum: {
         type: 'string',
         columnName: 'contactNum'
+    },
+    status: {
+        type: 'string',
+        enum: ['proceed', 'success'],
+        defaultsTo: function() {
+            return 'proceed';
+        }
     }
   }
 };

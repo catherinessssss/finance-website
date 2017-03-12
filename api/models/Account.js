@@ -15,7 +15,7 @@ module.exports = {
          columnName: 'accountType'
     },
     amount: {
-      type: 'integer',
+      type: 'float',
       columnName: 'amount'
     },
     accountNum: {
@@ -28,6 +28,10 @@ module.exports = {
     },
     swiftRecord: {
       collection: 'SwiftRecord',
+      via: 'account'
+    },
+    foreignRecord: {
+      collection: 'ForeignExchange',
       via: 'account'
     }
   }

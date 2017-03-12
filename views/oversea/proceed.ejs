@@ -1,0 +1,161 @@
+<h1><%= __('overseas_remittance') %></h1>
+<div style="margin-top:60px;">
+<form class="form-horizontal" role="form" action="/swiftRecord/confirm/<%=data.id%>" method="GET">
+    <div class="form-group">
+        <h3 class="col-sm-7 control-label"><%= __('swiftRecord_create_remitter_information') %></h3>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_name') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%= user.username %></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_identityNo') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%= user.identityNo %></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_country" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_country') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%= data.country%></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_address" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_address') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%=data.address %></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_account" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_account') %></label>
+        <div class="col-sm-5">
+            <label class="control-label">**********<%= data.account[0].accountNum.substring(11)%></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_currency" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_currency') %></label>
+        <div class="col-sm-5">
+            <label class="control-label" id="swiftRecord_create_remitter_currency"><%=data.account[0].accountType%></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_amount_avaliable" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_amount_avaliable') %></label>
+        <div class="col-sm-5">
+            <label class="control-label" id="swiftRecord_create_remitter_amount_avaliable"><%=data.account[0].amount%></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_remittance_amount" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_remittance_amount') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%= data.remittanceAmount%></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_realtime_amount" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_realtime_amount') %></label>
+        <div class="col-sm-5">
+            <label class="control-label" id="swiftRecord_create_remitter_realtime_amount"><%= data.realTimeAmount%></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_processing_fee_account" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_processing_fee_account') %></label>
+        <div class="col-sm-5">
+            <label class="control-label">**********<%=data.feeAccount.substring(11)%></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_processing_fee" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_processing_fee') %></label>
+        <div class="col-sm-5">
+            <label class="control-label" id="swiftRecord_create_remitter_processing_fee"><%= data.feeAmount%></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_processing_fee_currency" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_processing_fee_currency') %></label>
+        <div class="col-sm-5">
+            <label class="control-label" id="swiftRecord_create_remitter_processing_fee_currency"><%= data.feeType%></label>
+        </div>
+    </div>
+    <!-- <div class="form-group">
+        <label for="swiftRecord_create_remitter_processing_fee_amount" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_processing_fee_amount') %></label>
+        <div class="col-sm-5">
+            <label class="control-label" id="swiftRecord_create_remitter_processing_fee_amount"><%=data.account[0].amount%></label>
+        </div>
+    </div> -->
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_expense_way" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_expense_way') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%= data.expenseWay%></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <h3 class="col-sm-4 control-label"><%=__('swiftRecord_create_beneficiary_information')%></h3>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_beneficiary_name" class="col-sm-4 control-label"><%= __('swiftRecord_create_beneficiary_name') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%=data.beneficiaryName %></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_beneficiary_address" class="col-sm-4 control-label"><%= __('swiftRecord_create_beneficiary_address') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%=data.beneficiaryAddress %></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_beneficiary_account" class="col-sm-4 control-label"><%= __('swiftRecord_create_beneficiary_account') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%=data.beneficiaryAccount %></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_receiving_bank_swift" class="col-sm-4 control-label"><%= __('swiftRecord_create_receiving_bank_swift') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%=data.bankswift %></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_receiving_bank_confirmation" class="col-sm-4 control-label"><%= __('swiftRecord_create_receiving_bank_confirmation') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_postscript" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_postscript') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%=data.postscript %></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_beneficiary_resident_country" class="col-sm-4 control-label"><%= __('swiftRecord_create_beneficiary_resident_country') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%=data.beneficiaryResidentCountry %></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_remitter_purposes" class="col-sm-4 control-label"><%= __('swiftRecord_create_remitter_purposes') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%=data.purposes %></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_contact_name" class="col-sm-4 control-label"><%= __('swiftRecord_create_contact_name') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%=data.contactName %></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="swiftRecord_create_contact_num" class="col-sm-4 control-label"><%= __('swiftRecord_create_contact_num') %></label>
+        <div class="col-sm-5">
+            <label class="control-label"><%=data.contactNum %></label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-6 col-sm-10">
+          <button type="submit" class="btn btn-primary "><%= __('common_btn_confirm')%></button>
+        </div>
+    </div>
+</form>
+</div>
